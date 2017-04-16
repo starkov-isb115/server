@@ -17,8 +17,11 @@
 
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "27015"
+#define MAX 1000
+#define MAXNAME 10
 
 	SOCKET* ClientSockets;
+	char UserNames[MAXNAME][MAX];
 	int CV = 0;
 
 void msgToClients(SOCKET CS)
@@ -72,7 +75,13 @@ int main(void)
 	{
 		if( ConnectSocket = accept(ListenSocket, (SOCKADDR*)&address, &adresize));
 		{
-			std::cout << "Новый пользователь: " << ConnectSocket;
+			char gm[MAXNAME];
+			recv(ConnectSocket, gm, MAXNAME, NULL);
+			std::cout << gm;
+			for ( int i = 0; i < MAXNAME; i++ )
+			{ UserNames[CV][i] = gm[i]; }
+			std::cout << "Новый пользователь: " << gm;
+
 			ClientSockets[CV] = ConnectSocket; 
 			msgToClients(ConnectSocket);
 			CV++;
