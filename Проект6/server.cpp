@@ -24,26 +24,25 @@
 	char UserNames[MAXNAME][MAX];
 	int CV = 0;
 
-void msgToClients(SOCKET CS)
-{
-	char greet[DEFAULT_BUFLEN] = "Hello girls";
-	send(CS, greet, sizeof(greet),NULL);
-}
-
 void gAs(int vol)
 {
-	char* get = new char[DEFAULT_BUFLEN];
 	while(1)
 	{
-		char gm[DEFAULT_BUFLEN];
-		recv(ClientSockets[vol], gm, sizeof(gm), NULL);
-		std::cout << gm;
-		for ( int i = 0; i < CV; i++)
+		for (;; Sleep(75))
+	{
+		char *buffer = new char[1024];
+		memset(buffer, 0, sizeof(buffer)); std::printf(buffer);
+		if (recv(ClientSockets[vol], buffer, 1024, NULL))
 		{
-			if ( i != vol) send(ClientSockets[i], gm, strlen(gm), NULL);
+			for (int i = 0; i <= CV; i++)
+				send(ClientSockets[i], buffer, strlen(buffer), NULL);
 		}
+
+		delete buffer;
+	}
 	}
 }
+
 
 int main(void)
 {
@@ -71,11 +70,11 @@ int main(void)
 
 	SOCKET ConnectSocket;
 	
-	while(1)
+	for (;; Sleep(75))
 	{
-		if( ConnectSocket = accept(ListenSocket, (SOCKADDR*)&address, &adresize));
+		if( ConnectSocket = accept(ListenSocket, NULL, NULL));
 		{
-			char gm[MAXNAME];
+			char gm[MAXNAME]; for (int i = 0; i < MAXNAME; i++) gm[i] = 0;
 			recv(ConnectSocket, gm, MAXNAME, NULL);
 			std::cout << gm;
 			for ( int i = 0; i < MAXNAME; i++ )
@@ -83,7 +82,6 @@ int main(void)
 			std::cout << "Новый пользователь: " << gm;
 
 			ClientSockets[CV] = ConnectSocket; 
-			msgToClients(ConnectSocket);
 			CV++;
 			CreateThread(NULL,NULL,(LPTHREAD_START_ROUTINE)gAs,(LPVOID)(CV-1),NULL,NULL);
 		}
