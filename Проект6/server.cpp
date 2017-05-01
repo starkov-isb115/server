@@ -20,6 +20,8 @@
 #define MAX 1000
 #define MAXNAME 10
 
+	SOCKET ConnectSocket;
+	SOCKET ListenSocket;
 	SOCKET* ClientSockets;
 	char UserNames[MAXNAME][MAX];
 	int CV = 0;
@@ -46,30 +48,34 @@ void gAs(int vol)
 
 int main(void)
 {
-	setlocale(LC_ALL,"russian");
+	setlocale(LC_ALL, "russian");
+		WSAData Wsadata;
+		int res = WSAStartup(MAKEWORD(2, 2), &Wsadata);
+		if (res != 0) { return 0; }
 
-	WSAData wsaData;
-	WORD sockver = MAKEWORD(2,2);
-	if (WSAStartup(sockver, &wsaData) != 0 )
-	{
-		printf("ошибка при инициализации сокетов");
-		exit(1);
-	}
+		struct addrinfo hints;
+		struct addrinfo * result;
 
-	ClientSockets = (SOCKET*)calloc(64,sizeof(SOCKET));
-
-	SOCKADDR_IN address;
-	int adresize = sizeof(address);
-	address.sin_addr.s_addr = inet_addr("127.0.0.1");
-	address.sin_port = htons(1997);
-	address.sin_family = AF_INET;
-
-	SOCKET ListenSocket = socket(AF_INET, SOCK_STREAM, NULL);
-	bind(ListenSocket, (SOCKADDR*)&address, sizeof(address));
-	listen(ListenSocket, SOMAXCONN);
-
-	SOCKET ConnectSocket;
+		ClientSockets = (SOCKET*)calloc(64, sizeof(SOCKET));
+		ZeroMemory(&hints, sizeof(hints));
+		hints.ai_family = AF_INET;
+		hints.ai_flags = AI_PASSIVE;
+		hints.ai_socktype = SOCK_STREAM;
+		hints.ai_protocol = IPPROTO_TCP;
+		int iResult;
+		iResult = getaddrinfo(NULL, DEFAULT_PORT, &hints, &result);
+		if (iResult != 0) {
+			printf("getaddrinfo failed: %d\n", iResult);
+			WSACleanup();
+			return 1;
+		}
+		ListenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
 	
+		iResult = bind(ListenSocket, result->ai_addr, result->ai_addrlen);
+	
+		listen(ListenSocket, SOMAXCONN);
+		freeaddrinfo(result);
+
 	for (;; Sleep(75))
 	{
 		if( ConnectSocket = accept(ListenSocket, NULL, NULL));
@@ -79,7 +85,7 @@ int main(void)
 			std::cout << gm;
 			for ( int i = 0; i < MAXNAME; i++ )
 			{ UserNames[CV][i] = gm[i]; }
-			std::cout << "Новый пользователь: " << gm;
+			std::cout << "Iiaue iieuciaaoaeu: " << gm;
 
 			ClientSockets[CV] = ConnectSocket; 
 			CV++;
