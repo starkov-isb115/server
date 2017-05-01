@@ -16,7 +16,7 @@
 #pragma comment (lib, "AdvApi32.lib")
 
 #define DEFAULT_BUFLEN 512
-#define DEFAULT_PORT "27015"
+#define DEFAULT_PORT "1997"
 #define MAX 1000
 #define MAXNAME 10
 
@@ -52,8 +52,7 @@ int main(void)
 		WSAData Wsadata;
 		int res = WSAStartup(MAKEWORD(2, 2), &Wsadata);
 		if (res != 0) { return 0; }
-
-		struct addrinfo hints;
+struct addrinfo hints;
 		struct addrinfo * result;
 
 		ClientSockets = (SOCKET*)calloc(64, sizeof(SOCKET));
@@ -64,15 +63,11 @@ int main(void)
 		hints.ai_protocol = IPPROTO_TCP;
 		int iResult;
 		iResult = getaddrinfo(NULL, DEFAULT_PORT, &hints, &result);
-		if (iResult != 0) {
-			printf("getaddrinfo failed: %d\n", iResult);
-			WSACleanup();
-			return 1;
-		}
+	
 		ListenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
 	
 		iResult = bind(ListenSocket, result->ai_addr, result->ai_addrlen);
-	
+		
 		listen(ListenSocket, SOMAXCONN);
 		freeaddrinfo(result);
 
