@@ -14,7 +14,7 @@
 #pragma comment (lib, "Mswsock.lib")
 #pragma comment (lib, "AdvApi32.lib")
 
-#define DEFAULT_BUFLEN 512
+#define DEFAULT_BUFLEN 1024
 #define DEFAULT_PORT "1997"
 #define MAX 1000
 #define MAXNAME 10
@@ -44,7 +44,6 @@ void gAs(int vol)
 	}
 }
 
-
 int main(void)
 {
 	setlocale(LC_ALL, "russian");
@@ -56,9 +55,9 @@ int main(void)
 
 	    sockaddr_in local_addr;
     local_addr.sin_family = AF_INET;
-	local_addr.sin_port = htons(1997); // не забываем о сетевом порядке!!!
-    local_addr.sin_addr.s_addr = 0; // сервер принимает подключения
-                                    // на все свои IP-адреса
+	local_addr.sin_port = htons(1997);
+    local_addr.sin_addr.s_addr = 0; 
+                                    
  
 	SOCKET ListenSocket = socket(AF_INET, SOCK_STREAM, NULL);
 	bind(ListenSocket, (sockaddr *)&local_addr, sizeof(local_addr));
@@ -74,7 +73,6 @@ int main(void)
 			std::cout << gm;
 			for ( int i = 0; i < MAXNAME; i++ )
 			{ UserNames[CV][i] = gm[i]; }
-			std::cout << "Iiaue iieuciaaoaeu: " << gm;
 
 			ClientSockets[CV] = ConnectSocket; 
 			CV++;
