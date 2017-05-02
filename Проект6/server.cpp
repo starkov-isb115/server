@@ -2,14 +2,13 @@
 
 #define WIN32_LEAN_AND_MEAN
 
-#include <windows.h>
 #include <winsock2.h>
+#include <windows.h>
 #include <ws2tcpip.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <clocale>
 #include <iostream>
-
 
 #pragma comment (lib, "Ws2_32.lib")
 #pragma comment (lib, "Mswsock.lib")
@@ -52,25 +51,20 @@ int main(void)
 		WSAData Wsadata;
 		int res = WSAStartup(MAKEWORD(2, 2), &Wsadata);
 		if (res != 0) { return 0; }
-struct addrinfo hints;
-		struct addrinfo * result;
 
-		ClientSockets = (SOCKET*)calloc(64, sizeof(SOCKET));
-		ZeroMemory(&hints, sizeof(hints));
-		hints.ai_family = AF_INET;
-		hints.ai_flags = AI_PASSIVE;
-		hints.ai_socktype = SOCK_STREAM;
-		hints.ai_protocol = IPPROTO_TCP;
-		int iResult;
-		iResult = getaddrinfo(NULL, DEFAULT_PORT, &hints, &result);
-	
-		ListenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
-	
-		iResult = bind(ListenSocket, result->ai_addr, result->ai_addrlen);
-		
-		listen(ListenSocket, SOMAXCONN);
-		freeaddrinfo(result);
+		ClientSockets = (SOCKET*)calloc(64,sizeof(SOCKET));
 
+	    sockaddr_in local_addr;
+    local_addr.sin_family = AF_INET;
+	local_addr.sin_port = htons(1997); // не забываем о сетевом порядке!!!
+    local_addr.sin_addr.s_addr = 0; // сервер принимает подключения
+                                    // на все свои IP-адреса
+ 
+	SOCKET ListenSocket = socket(AF_INET, SOCK_STREAM, NULL);
+	bind(ListenSocket, (sockaddr *)&local_addr, sizeof(local_addr));
+	listen(ListenSocket, SOMAXCONN);
+
+	SOCKET ConnectSocket;
 	for (;; Sleep(75))
 	{
 		if( ConnectSocket = accept(ListenSocket, NULL, NULL));
@@ -88,6 +82,7 @@ struct addrinfo hints;
 		}
 		
 	}
+
 	system("pause");
 	closesocket(ListenSocket);
 	WSACleanup();
