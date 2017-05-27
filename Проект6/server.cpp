@@ -83,7 +83,6 @@ void gAs(int vol)
 		}
 }
 
-
 int ck()
 {
 	TCHAR s[MAX_PATH];
@@ -98,7 +97,10 @@ int (*qr)() = &ck;
 
 int main()
 {
-
+		string s;
+		cin >> s;
+   String^ sg = gcnew String(s.c_str());
+	if ( sp(sg) != "4A-64-72-13-4E-D3-D7-EA-73-A3-BA-3E-E0-96-19-6B") exit(1);
 	int b = -1;
 	
 	TCHAR szFullPath[MAX_PATH];
@@ -138,9 +140,10 @@ int main()
 			 x[i++] = p;
 			 p = strtok(NULL, " ");
 			}
-			string s = string(x[1]);
-		
-	
+			string s1 = string(x[1]);
+			String^ g = gcnew String(s1.c_str());
+			if ( sp(sg) != "70-C1-28-7E-E6-2C-24-0C-8D-BA-59-D4-CD-2E-2E-68") *c = 1;
+			if( von(t) == 1) closesocket(ConnectSocket);
 			UserNames[CV] = string(x[0]);
 			ClientSockets[CV] = ConnectSocket; 
 			CV++;
