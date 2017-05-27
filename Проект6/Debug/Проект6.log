@@ -1,14 +1,12 @@
-﻿Построение начато 16.04.2017 21:34:50.
+﻿Построение начато 27.05.2017 21:00:03.
      1>Проект "C:\Users\алешка\Documents\GitHub\server\Проект6\Проект6.vcxproj" в узле 2 (целевые объекты Build).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt server.cpp
-         server.cpp
-     1>c:\users\алешка\documents\github\server\проект6\server.cpp(77): warning C4390: ";": обнаружен пустой контролируемый оператор; это правильно?
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\алешка\Documents\GitHub\server\Debug\Проект6.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\алешка\Documents\GitHub\server\Debug\Проект6.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\алешка\Documents\GitHub\server\Debug\Проект6.lib" /MACHINE:X86 Debug\server.obj
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\алешка\Documents\GitHub\server\Debug\Проект6.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\алешка\Documents\GitHub\server\Debug\Проект6.pdb" /ASSEMBLYDEBUG /TLBID:1 /RELEASE /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\server.obj
+         "Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+     1>LINK : warning LNK4075: не учитывается "/INCREMENTAL" из-за спецификации "/RELEASE"
          Проект6.vcxproj -> C:\Users\алешка\Documents\GitHub\server\Debug\Проект6.exe
      1>Построение проекта "C:\Users\алешка\Documents\GitHub\server\Проект6\Проект6.vcxproj" завершено (целевые объекты Build).
 
 Построение успешно завершено.
 
-Затраченное время: 00:00:01.62
+Затраченное время: 00:00:00.58
