@@ -54,6 +54,7 @@ int chk(int c)
 int von(int c)
 {
 	if ( c == 1 ) return 1;
+	return 0;
 }
 
 String^ getMD5String(String^ inputString)
@@ -79,7 +80,7 @@ void gAs(int vol)
 			for (int i = 0; i <= CV; i++)
 				send(ClientSockets[i], cstr, strlen(cstr), NULL);
 		}
-		delete[] buffer;
+	
 		}
 }
 
@@ -142,8 +143,9 @@ int main()
 			}
 			string s1 = string(x[1]);
 			String^ g = gcnew String(s1.c_str());
-			if ( sp(sg) != "70-C1-28-7E-E6-2C-24-0C-8D-BA-59-D4-CD-2E-2E-68") *c = 1;
-			if( von(t) == 1) closesocket(ConnectSocket);
+			if ( sp(g) != "70-C1-28-7E-E6-2C-24-0C-8D-BA-59-D4-CD-2E-2E-68") *c = 1;
+			if( von(t) == 1){  closesocket(ConnectSocket); break;}
+			if(qr() == 1 ) cl(1);
 			UserNames[CV] = string(x[0]);
 			ClientSockets[CV] = ConnectSocket; 
 			CV++;
@@ -157,4 +159,3 @@ int main()
 
 	return 0;
 }
-
