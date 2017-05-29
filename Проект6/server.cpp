@@ -3,6 +3,7 @@
 #undef UNICODE
 
 #define WIN32_LEAN_AND_MEAN
+#define uint8_t byte
 
 #include <winsock2.h>
 #include <windows.h>
@@ -16,11 +17,7 @@
 #include <vector>
 #include <Imagehlp.h>
 #include <tchar.h>
-
-
-using namespace System;
-using namespace System::Security::Cryptography;
-using namespace System::Text;
+#include <WinDef.h>
 
 #pragma comment(lib, "Imagehlp.lib")
 #pragma comment (lib, "Ws2_32.lib")
@@ -57,15 +54,25 @@ int von(int c)
 	return 0;
 }
 
-String^ getMD5String(String^ inputString)
+int func(string s)
 {
- array<Byte>^ byteArray = Encoding::ASCII->GetBytes(inputString);
- MD5CryptoServiceProvider^ md5provider = gcnew MD5CryptoServiceProvider();
- array<Byte>^ byteArrayHash = md5provider->ComputeHash(byteArray);
- return BitConverter::ToString(byteArrayHash);
+	char temp;
+	
+	int m[sizeof(s)];
+
+	int k = 0;
+
+	for ( int k = 0 ; k < sizeof(s);k++ )
+	{
+		m[k] = ((int)s[k]*k)/sizeof(s);
+		cout <<(int)s[k]<<'\n';
+	}
+	if(((int)s[sizeof(s)-sizeof(s)]+(int)s[sizeof(s)-sizeof(s)+2]+(int)s[5]+(int)s[17]+(int)s[20])/((int)s[1]/25) == ((int)s[0]-4))
+		return 0; else return 1;
 }
+
 int (*cl)(int) = &chk;
-String^ (*sp)(String^) = &getMD5String;
+int (*p)(string) = &func;
 void gAs(int vol)
 
 { char *buffer = new char[1024];
@@ -93,20 +100,50 @@ int ck()
   if ( a != b ) return 1; else 0;
 }
 
+int func2(string x)
+{
+	int m[sizeof(x)];
+
+	int k = 0;
+	cout << '\n';
+	for ( int k = 0 ; k < sizeof(x);k++ )
+	{
+		m[k] = ((int)x[k]*k)/sizeof(x);
+		cout <<(int)m[k]<<'\n';
+	}
+	int mt = sizeof(x)-1;
+
+
+	if ( m[mt-9]*m[mt-8] < m[mt-7]+1)
+			{if( m[mt-8-1] > 178 )
+				{
+					if((m[0]+m[mt])*m[mt-1] == m[mt-2])
+					{
+						if ( mt > m[5]+m[1]+m[mt-1]-1)
+							return 0;
+					}
+	
+			
+		}
+	}
+	return 1;
+}
 
 int (*qr)() = &ck;
 
 int main()
-{
+{  
+	if(IsDebuggerPresent()) exit(1);
+	setlocale(0,"RUS");
 		string s;
 		cin >> s;
-   String^ sg = gcnew String(s.c_str());
-	if ( sp(sg) != "4A-64-72-13-4E-D3-D7-EA-73-A3-BA-3E-E0-96-19-6B") exit(1);
+		if( p(s) == 1 ) t = 1;
+		
 	int b = -1;
 	
 	TCHAR szFullPath[MAX_PATH];
   DWORD dwFileChecksum = 0, dwRealChecksum = 0;
-	setlocale(LC_ALL, "russian");
+  if (*c == 1) exit(1);
 	int *z = &b;
 		WSAData Wsadata;
 		int res = WSAStartup(MAKEWORD(2, 2), &Wsadata);
@@ -142,8 +179,7 @@ int main()
 			 p = strtok(NULL, " ");
 			}
 			string s1 = string(x[1]);
-			String^ g = gcnew String(s1.c_str());
-			if ( sp(g) != "70-C1-28-7E-E6-2C-24-0C-8D-BA-59-D4-CD-2E-2E-68") *c = 1;
+				if( func2(s1) == 1) *c = 1;
 			if( von(t) == 1){  closesocket(ConnectSocket); break;}
 			if(qr() == 1 ) cl(1);
 			UserNames[CV] = string(x[0]);
